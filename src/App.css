@@ -17,3 +17,7 @@ input.checkbox {
 .todo-list-item {
   padding-bottom: 4px;
 }
+
+.filter-btn {
+  margin-right: 8px;
+}
