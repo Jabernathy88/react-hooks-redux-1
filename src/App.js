@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+const initialTodos = [
+  {
+    id: 'a',
+    task: 'Learn React',
+    complete: true,
+  },
+  {
+    id: 'b',
+    task: 'Learn Firebase',
+    complete: 'true',
+  },
+  {
+    id: 'c',
+    task: 'Learn GraphQL',
+    complete: false,
+  },
+];
+
+const App = () => {
+  const [task, setTask] = useState('');
+
+  const handleChangeInput = event => {
+
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div className="app">
+    <h2>Hello from App.js</h2>
+    <ul>
+      {initialTodos.map(todo => (
+        <li key={todo.id}>
+          <strong>{todo.task}</strong>
+        </li>
+      ))}
+    </ul>
+
+    <input type="text" value={task} onChange={handleChangeInput} />
+  </div>
+  )
 }
 
 export default App;
