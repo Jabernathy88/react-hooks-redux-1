@@ -1,44 +1,82 @@
 import React, { useState } from 'react';
 import './App.css';
+import uuid from 'uuid/v4';
 
 const initialTodos = [
   {
-    id: 'a',
+    id: uuid(),
     task: 'Learn React',
     complete: true,
   },
   {
-    id: 'b',
+    id: uuid(),
     task: 'Learn Firebase',
-    complete: 'true',
+    complete: false,
   },
   {
-    id: 'c',
+    id: uuid(),
     task: 'Learn GraphQL',
     complete: false,
   },
 ];
 
 const App = () => {
+  const [todos, setTodos] = useState(initialTodos)
   const [task, setTask] = useState('');
 
   const handleChangeInput = event => {
-
+    setTask(event.target.value);
   };
 
-  return (
-  <div className="app">
-    <h2>Hello from App.js</h2>
-    <ul>
-      {initialTodos.map(todo => (
-        <li key={todo.id}>
-          <strong>{todo.task}</strong>
-        </li>
-      ))}
-    </ul>
+  const handleChangeCheckbox = id => {
+    setTodos(
+      todos.map(todo => {
+        if (todo.id === id) {
+          return { ...todo, complete: !todo.complete };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
 
-    <input type="text" value={task} onChange={handleChangeInput} />
-  </div>
+  const handleSubmit = event => {
+    if (task) {
+      setTodos(todos.concat({
+        id: uuid(),
+        task,
+        complete: false
+      }))
+    }
+    setTask('')
+    event.preventDefault();
+  }
+
+  return (
+    <div className="app">
+      <h2>Hello from App.js</h2>
+      <div className="todo-list-container">
+        {todos.map(todo => (
+          <div className="todo-list-item" key={todo.id}>
+            <input
+              className="checkbox"
+              type="checkbox"
+              checked={todo.complete}
+              onChange={() => handleChangeCheckbox(todo.id)}
+            />
+            <strong>{todo.task}</strong>
+          </div>
+        ))}
+      </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={task}
+          onChange={handleChangeInput}
+        />
+        <button type="submit">Add Todo</button>
+      </form>
+    </div>
   )
 }
 

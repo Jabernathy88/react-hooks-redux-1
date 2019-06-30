@@ -5,3 +5,15 @@ body {
   width: 100vw;
   display: block;
 }
+
+input.checkbox {
+  margin: 0 4px 0 0;
+}
+
+.todo-list-container {
+  padding-bottom: 8px;
+}
+
+.todo-list-item {
+  padding-bottom: 4px;
+}
